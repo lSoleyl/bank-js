@@ -1,0 +1,1 @@
+var bank = angular.module('bank', []);
