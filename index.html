@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
-  <head ng-app="bank">
+<html ng-app="bankjs">
+  <head>
+    <title>Bank-JS</title>
+
     <!-- Bootstrap & JQuery-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -12,7 +14,7 @@
     <!-- AngularJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 
-    <!-- Include our script -->
+    <!-- Include our application -->
     <script src="./scripts/app.js"></script>
 
 
@@ -23,8 +25,10 @@
       <li><a data-toggle="tab" href="#newAccount">New account</a></li>
     </ul>
     <div class="tab-content">
-      <div id="overview" class="tab-pane in active">
+      <div id="overview" class="tab-pane in active" ng-controller="overview">
         <h3>Overview</h3>
+
+        Time: {{time}}
       </div>
       <div id="newAccount" class="tab-pane">
         <h3>New account</h3>
