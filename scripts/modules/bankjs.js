@@ -1,0 +1,1 @@
+var bankjs = angular.module('bankjs', []);

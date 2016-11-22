@@ -1,5 +1,3 @@
-var bankjs = angular.module('bankjs', [])
-
 bankjs.directive('overview', ['$interval', function($interval) {
   
   return {

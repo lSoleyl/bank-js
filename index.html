@@ -3,7 +3,7 @@
   <head>
     <title>Bank-JS</title>
 
-    <!-- Bootstrap & JQuery-->
+    <!-- Bootstrap, JQuery & other libs-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -11,11 +11,24 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
+
     <!-- AngularJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 
-    <!-- Include our application -->
-    <script src="./scripts/app.js"></script>
+    <!-- Utilities -->
+    <script src="./scripts/utility/EventEmitter.js"></script>
+
+    <!-- Include our modules -->
+    <script src="./scripts/modules/config.js"></script>
+    <script src="./scripts/modules/bankjs.js"></script>
+
+    <!-- Services -->
+    <script src="./scripts/services/storage.js"></script>
+    <script src="./scripts/services/account.js"></script>
+
+    <!-- Directives -->
+    <script src="./scripts/directives/overview.js"></script>
+    
 
 
   </head>
