@@ -1,1 +1,1 @@
-var bankjs = angular.module('bankjs', []);
+var bankjs = angular.module('bankjs', ['config']);

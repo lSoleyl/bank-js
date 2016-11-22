@@ -6,7 +6,7 @@ bankjs.factory('storage', ['config', function(config) {
 
   //The service object to return
   var service = {}
-  
+
   // Retrieve a stored value
   service.get = function(key) {
     return data[key]

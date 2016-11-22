@@ -23,8 +23,10 @@
     <script src="./scripts/modules/bankjs.js"></script>
 
     <!-- Services -->
+    <script src="./scripts/services/id.js"></script>
     <script src="./scripts/services/storage.js"></script>
     <script src="./scripts/services/account.js"></script>
+    <script src="./scripts/services/transaction.js"></script>
 
     <!-- Directives -->
     <script src="./scripts/directives/overview.js"></script>
@@ -33,16 +35,18 @@
 
   </head>
   <body>
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
-      <li><a data-toggle="tab" href="#newAccount">New account</a></li>
-    </ul>
-    <div class="tab-content">
-      <div id="overview" class="tab-pane in active">
-        <overview></overview>
-      </div>
-      <div id="newAccount" class="tab-pane">
-        <h3>New account</h3>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
+        <li><a data-toggle="tab" href="#newAccount">New account</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="overview" class="tab-pane in active">
+          <overview></overview>
+        </div>
+        <div id="newAccount" class="tab-pane">
+          <h3>New account</h3>
+        </div>
       </div>
     </div>
   </body>
