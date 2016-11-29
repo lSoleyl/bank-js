@@ -7,9 +7,7 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
     storage.put('transactions', transactions)
   }
 
-  var transaction = {}
-  transaction.__proto__ = EventEmitter.prototype //Make this service into an event emitter
-
+  var transaction = new EventEmitter()
 
   transaction.add = function(fromID, toID, amountCt) {
     if (fromID == toID)
