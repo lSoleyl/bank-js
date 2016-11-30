@@ -1,6 +1,10 @@
-bankjs.element('overview', ['$interval', 'account', '$scope', function($interval, account, $scope) {
+bankjs.element('overview', ['$interval', 'account', '$scope', '$rootScope', function($interval, account, $scope, $rootScope) {
   $scope.accounts = function() {
-    return account.all()
+    var accs = account.all()
+    if ($rootScope.settings && $rootScope.settings.show_system_account)
+      return accs
+    
+    return _.filter(accs, function(acc) { return acc !== account.bank })
   }
 
   $scope.time = (new Date()).toLocaleTimeString()

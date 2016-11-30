@@ -1,0 +1,14 @@
+<h3>Settings</h3>
+
+<h4>General</h4>
+<div>
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" ng-model="settings.show_system_account">
+    Show system accounts
+  </label>  
+</div>
+<h4>Storage</h4>
+<div>
+  Size: {{ storageSize() | bytes }}
+  <button type="button" class="btn btn-warning" ng-click="clearStorage()">Clear storage</button>
+</div>
