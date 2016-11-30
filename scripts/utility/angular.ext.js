@@ -11,41 +11,49 @@ angular.module = function() {
    */
   mod.element = function(elementName, linkFn) {
     var dependencies = [] //Directive dependencies
-    var linkDependencies = ['$scope', '$element', '$attr'] //These are linktime dependencies
-    if (typeof(linkFn) === "object" && linkFn.constructor == Array) { //Dependencies are given
+    var linkDependencyList = ['$scope', '$element', '$attr', '$rootScope'] //These are linktime dependencies
+    if (typeof(linkFn) === "object" && linkFn.constructor === Array) { //Dependencies are given as array
       dependencies = linkFn
       linkFn = dependencies.pop() //last element is the function itself
       if (typeof(linkFn) !== "function")
         throw new Error("Passed invalid link function " + linkFn)
+    } else if (typeof(linkFn) === "function" && linkFn.$inject) { //Function has set inject property
+      dependencies = linkFn.$inject
     }
 
-    //Filter out link time dependencies
-    var directiveDependencies = _.difference(dependencies, linkDependencies)
+    //Split dependencies
+    var directiveDependencies = _.difference(dependencies, linkDependencyList) //Dependencies for directive
+    var linkDependencies = _.difference(dependencies, directiveDependencies)   //Dependencies for link
 
 
+    //This function retruns the directive's definition object
     var directiveFn = function() {
       var dependencyMap = {} //Hold a map of name -> service
       var resolvedDeps = arguments
-
       _.each(directiveDependencies, function(name, i) { dependencyMap[name] = resolvedDeps[i] }) //Build map
+
+      //The function which calls the actual linkFn and passes the resolved dependencies to it
+      var linkFnCaller = function() {
+        var resolvedDeps = arguments
+        _.each(linkDependencies, function(name, i) { dependencyMap[name] = resolvedDeps[i] }) //Complete map
+
+        //Finally call the passed element linkfn with resolved dependencies
+        return linkFn.apply(this, _.map(dependencies, function(name) { return dependencyMap[name] }))
+      }
+
+      //Set link time dependencies via $inject
+      linkFnCaller.$inject = linkDependencies
 
       return {
         templateUrl:'templates/' + elementName + '.html',
         restrict:'E',
-        link: function($scope, $elem, $attr) {
-          dependencyMap['$scope'] = $scope
-          dependencyMap['$elem'] = $elem
-          dependencyMap['$attr'] = $attr
-
-          //finally call linkfn with resolved dependencies
-          return linkFn.apply(this, _.map(dependencies, function(name) { return dependencyMap[name] }))          
-        }
+        link: linkFnCaller
       }
     }
 
-    //Build directive function with filtered dependencies
-    var directiveArg = directiveDependencies.concat([directiveFn])
-    return mod.directive(elementName, directiveArg)
+    //Set directive dependencies via $inject
+    directiveFn.$inject = directiveDependencies
+    return mod.directive(elementName, directiveFn)
   }
 
 
