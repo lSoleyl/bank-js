@@ -19,11 +19,15 @@ angular.module = function() {
         throw new Error("Passed invalid link function " + linkFn)
     }
 
+    //Filter out link time dependencies
+    var directiveDependencies = _.difference(dependencies, linkDependencies)
+
 
     var directiveFn = function() {
       var dependencyMap = {} //Hold a map of name -> service
       var resolvedDeps = arguments
-      _.each(dependencies, function(name, i) { dependencyMap[name] = resolvedDeps[i] }) //Build map
+
+      _.each(directiveDependencies, function(name, i) { dependencyMap[name] = resolvedDeps[i] }) //Build map
 
       return {
         templateUrl:'templates/' + elementName + '.html',
@@ -40,9 +44,7 @@ angular.module = function() {
     }
 
     //Build directive function with filtered dependencies
-    var directiveArg = _.difference(dependencies, linkDependencies)
-    directiveArg.push(directiveFn)
-
+    var directiveArg = directiveDependencies.concat([directiveFn])
     return mod.directive(elementName, directiveArg)
   }
 

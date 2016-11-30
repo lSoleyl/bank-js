@@ -1,6 +1,5 @@
                         
-bankjs.element('newAccount', ['account', '$scope', function(account, $scope) {
-  console.dir(arguments) //FIXME: if I swap account and $scope, then account becomes undefined...
+bankjs.element('newAccount', ['$scope', 'account', function($scope, account) {
   //Function to reset form data
   $scope.reset = function() {
     $scope.account = {balance:0, owner:""}
