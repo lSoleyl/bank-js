@@ -7,6 +7,7 @@ bankjs.factory('account', ['storage', 'id', 'transaction', function(storage, id,
     storage.put('accounts', accounts)
   }
 
+  //TODO add passwordhash
   function Account(name) {
     this.id = id(++accounts.id, 6)
     this.name = name

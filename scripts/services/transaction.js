@@ -7,6 +7,7 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
     storage.put('transactions', transactions)
   }
 
+  //TODO: add date to transaction
   var transaction = new EventEmitter()
 
   transaction.add = function(fromID, toID, amountCt) {
