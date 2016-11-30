@@ -11,7 +11,7 @@ angular.module = function() {
    */
   mod.element = function(elementName, linkFn) {
     var dependencies = [] //Directive dependencies
-    var linkDependencyList = ['$scope', '$element', '$attr', '$rootScope'] //These are linktime dependencies
+    var linkDependencyList = ['$scope', '$element', '$attr', '$controller'] //These are the arguments for the link function
     if (typeof(linkFn) === "object" && linkFn.constructor === Array) { //Dependencies are given as array
       dependencies = linkFn
       linkFn = dependencies.pop() //last element is the function itself
@@ -35,19 +35,17 @@ angular.module = function() {
       //The function which calls the actual linkFn and passes the resolved dependencies to it
       var linkFnCaller = function() {
         var resolvedDeps = arguments
-        _.each(linkDependencies, function(name, i) { dependencyMap[name] = resolvedDeps[i] }) //Complete map
+        _.each(linkDependencyList, function(name, i) { dependencyMap[name] = resolvedDeps[i] }) //Complete map
 
         //Finally call the passed element linkfn with resolved dependencies
         return linkFn.apply(this, _.map(dependencies, function(name) { return dependencyMap[name] }))
       }
 
-      //Set link time dependencies via $inject
-      linkFnCaller.$inject = linkDependencies
-
       return {
         templateUrl:'templates/' + elementName + '.html',
         restrict:'E',
-        link: linkFnCaller
+        link: linkFnCaller,
+        scope:true
       }
     }
 
