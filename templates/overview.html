@@ -9,11 +9,11 @@
   <tr>
     <th>Account</th>
     <th>Owner</th>
-    <th>Balance</th>
+    <th class="text-right">Balance</th>
   </tr>
   <tr ng-repeat="account in accounts() track by account.id">
     <td>{{account.id}}</td>
     <td>{{account.name}}</td>
-    <td>{{account.balance() / 100.0 | currency : '' : 2}} €</td>
+    <td class="text-right">{{account.balance() / 100.0 | currency : '' : 2}} €</td>
   </tr>
 </table>
