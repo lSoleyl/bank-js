@@ -3,7 +3,7 @@
 bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
   var transactions = storage.get('transactions')
   if (!transactions) {
-    transactions = {id:1, list:[]}
+    transactions = {id:0, list:[]}
     storage.put('transactions', transactions)
   }
 
