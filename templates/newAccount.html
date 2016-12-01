@@ -1,9 +1,29 @@
 <h3>New account</h3>
 
 <form>
-  <div class="form-group">
-    <label for="new-owner">Owner name:</label>
-    <input type="text" class="form-control" ng-model="account.owner" id="new-owner">
+  <div class="form-group" ng-class="{'has-error':!nameLength()}">
+    <label class="control-label" for="new-owner">Owner name:</label>
+    <input type="text" class="form-control" ng-model="account.owner" ng-trim="true" id="new-owner">
+    <div ng-show="!nameLength()" class="invalid">
+      Name must not be empty!
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-6" ng-class="{'has-error':!passwordLength()}">
+      <label class="control-label" for="new-password1">Password</label>
+      <input type="password" class="form-control" ng-model="account.password1" id="new-password1"> 
+      <div ng-show="!passwordLength()" class="invalid">
+        Password must be at least 4 characters long!
+      </div>
+    </div>
+    <div class="form-group col-md-6" ng-class="{'has-error':!passwordsMatch()}">
+      <label class="control-label" for="new-password2">Confirm password</label>
+      <input type="password" class="form-control" ng-model="account.password2" id="new-password2" >
+      <div ng-show="!passwordsMatch()" class="invalid">
+        Passwords must match!
+      </div>
+    </div>
+
   </div>
   <div class="form-group">
     <label for="new-balance">Initial balance:</label>
@@ -13,5 +33,5 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" ng-click="createAccount()">Create</button>
+  <button class="btn btn-primary" ng-click="createAccount()" ng-disabled="!formValid()">Create</button>
 </form>

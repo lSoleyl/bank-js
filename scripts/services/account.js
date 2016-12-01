@@ -8,9 +8,10 @@ bankjs.factory('account', ['storage', 'id', 'transaction', function(storage, id,
   }
 
   //TODO add passwordhash
-  function Account(name) {
+  function Account(name, password) {
     this.id = id(++accounts.id, 6)
     this.name = name
+    this.password = sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(password)) //Store hashed password
   }
 
   Account.prototype.balance = function() {
@@ -26,13 +27,13 @@ bankjs.factory('account', ['storage', 'id', 'transaction', function(storage, id,
 
   var account = {}
 
-  account.create = function(owner, balance) {
+  account.create = function(owner, password, balance) {
     //Create account
-    var acc = new Account(owner)
+    var acc = new Account(owner, password)
     accounts.map[acc.id] = acc
 
     //Transfer initial balance from bank
-    transaction.add(account.bank.id, acc.id, parseInt(balance*100)) 
+    transaction.add(account.bank.id, acc.id, parseInt(parseFloat(balance)*100)) 
   }
 
   account.all = function() { return _.values(accounts.map) }

@@ -10,5 +10,5 @@
 <h4>Storage</h4>
 <div>
   Size: {{ storageSize() | bytes }}
-  <button type="button" class="btn btn-warning" ng-click="clearStorage()">Clear storage</button>
+  <button type="button" class="btn btn-warning" ng-click="clearStorage()" ng-disabled="storageSize() == 0">Clear storage</button>
 </div>

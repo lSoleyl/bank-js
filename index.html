@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html ng-app="bankjs">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bank-JS</title>
 
     <!-- Bootstrap, JQuery & other libs-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
+
+    <script src="/scripts/third-party/sjcl.js"></script><!-- Crypto -->
 
     <!-- AngularJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
@@ -36,6 +40,12 @@
     <script src="./scripts/directives/overview.js"></script>
     <script src="./scripts/directives/newAccount.js"></script>
     <script src="./scripts/directives/settings.js"></script>
+
+    <style>
+      div.invalid {
+        color:#a94442;
+      }
+    </style>
 
   </head>
   <body>
