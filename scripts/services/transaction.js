@@ -7,7 +7,10 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
     storage.put('transactions', transactions)
   }
 
-  //TODO: add date to transaction
+  //Load date strings into date objects (necessary for date formatter)
+  _.each(transactions.list, function(transaction) { transaction.date = new Date(transaction.date) })
+
+  //Create service object
   var transaction = new EventEmitter()
 
   transaction.add = function(fromID, toID, amountCt) {
@@ -19,7 +22,8 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
       'id':id(tid, 10),
       'from':fromID,
       'to':toID,
-      'amount':amountCt
+      'amount':amountCt,
+      'date':new Date()
     })
 
     storage.save() //Save each change
