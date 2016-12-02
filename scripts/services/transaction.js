@@ -13,7 +13,7 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
   //Create service object
   var transaction = new EventEmitter()
 
-  transaction.add = function(fromID, toID, amountCt) {
+  transaction.add = function(fromID, toID, amountCt, description) {
     if (fromID == toID)
       return;
 
@@ -23,6 +23,7 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
       'from':fromID,
       'to':toID,
       'amount':amountCt,
+      'description':description,
       'date':new Date()
     })
 
@@ -44,6 +45,10 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
     })
 
     return balance
+  }
+
+  transaction.all = function() {
+    return transactions.list
   }
 
 

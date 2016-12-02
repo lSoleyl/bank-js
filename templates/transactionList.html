@@ -1,0 +1,28 @@
+<h3>Transactions</h3>
+
+
+<div class="form-group">
+  <label for="filter-acc" class="control-label">Select Account</label>
+  <select ng-model="filter" class="form-control" id="filter-acc">
+    <option value=""></option>
+    <option ng-repeat="account in accounts() track by account.id" value="{{account.id}}">{{account.id}} - {{account.name}}</option>  
+  </select>
+  
+</div>
+
+<table class="table">
+  <tr>
+    <th>Nr</th>
+    <th>From</th>
+    <th>To</th>
+    <th class="text-right">Amount</th>
+    <th>Description</th>
+  </tr>
+  <tr ng-repeat="transaction in transactions()">
+    <td>{{transaction.id}}</td>
+    <td>{{transaction.from}}</td>
+    <td>{{transaction.to}}</td>
+    <td align="right">{{transaction.amount | money}}</td>
+    <td>{{transaction.description}}</td>
+  </tr>
+</table>

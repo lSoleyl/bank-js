@@ -33,7 +33,7 @@ bankjs.factory('account', ['storage', 'id', 'transaction', function(storage, id,
     accounts.map[acc.id] = acc
 
     //Transfer initial balance from bank
-    transaction.add(account.bank.id, acc.id, parseInt(parseFloat(balance)*100)) 
+    transaction.add(account.bank.id, acc.id, parseInt(parseFloat(balance)*100), "Account created") 
   }
 
   account.all = function() { return _.values(accounts.map) }

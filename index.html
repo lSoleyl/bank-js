@@ -29,6 +29,7 @@
 
     <!-- Filters -->
     <script src="./scripts/filters/bytes.js"></script>
+    <script src="./scripts/filters/money.js"></script>
 
     <!-- Services -->
     <script src="./scripts/services/id.js"></script>
@@ -40,6 +41,7 @@
     <script src="./scripts/directives/overview.js"></script>
     <script src="./scripts/directives/newAccount.js"></script>
     <script src="./scripts/directives/settings.js"></script>
+    <script src="./scripts/directives/transactionList.js"></script>
 
     <style>
       div.invalid {
@@ -53,6 +55,7 @@
       <nav>
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
+          <li><a data-toggle="tab" href="#transactions">Transactions</a></li>
           <li><a data-toggle="tab" href="#newAccount">New account</a></li>
           <li><a data-toggle="tab" href="#settings">Settings</a></li>
         </ul>
@@ -60,6 +63,9 @@
       <div class="tab-content">
         <div id="overview" class="tab-pane in active">
           <overview></overview>
+        </div>
+        <div id="transactions" class="tab-pane">
+          <transaction-list></transaction-list>
         </div>
         <div id="newAccount" class="tab-pane">
           <new-account></new-account>
