@@ -8,7 +8,7 @@ bankjs.element('newAccount', ['$scope', 'account', function($scope, account) {
 
   //Actually creates the account
   $scope.createAccount = function() {
-    account.create($scope.account.owner, $scope.account.password1, $scope.account.balance)
+    account.create($scope.account.owner, $scope.account.password1, $scope.account.balance || 0)
     $scope.reset()
   }
 
@@ -34,10 +34,14 @@ bankjs.element('newAccount', ['$scope', 'account', function($scope, account) {
     return $scope.account.password1 && $scope.account.password2 && $scope.passwordsMatch() && $scope.passwordLength()
   }
 
+  $scope.validBalance = function() {
+    return $scope.account.balance >= 0
+  }
+
   /** Enables/Disables the submit button
    */
   $scope.formValid = function() {
-    return $scope.validPassword() && $scope.validName()
+    return $scope.validPassword() && $scope.validName() && $scope.validBalance()
   }
 
 
