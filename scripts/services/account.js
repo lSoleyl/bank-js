@@ -27,6 +27,10 @@ bankjs.factory('account', ['storage', 'id', 'transaction', function(storage, id,
 
   var account = {}
 
+  account.get = function(nr) { return accounts.map[id(nr, 6)] }
+
+  account.bank = account.get(0) //The bank account always has the id 0
+
   account.create = function(owner, password, balance) {
     //Create account
     var acc = new Account(owner, password)
@@ -36,11 +40,18 @@ bankjs.factory('account', ['storage', 'id', 'transaction', function(storage, id,
     transaction.add(account.bank.id, acc.id, parseInt(parseFloat(balance)*100), "Account created") 
   }
 
-  account.all = function() { return _.values(accounts.map) }
+  //Return all accounts, if filtered is true, then the system account will not be returned
+  account.all = function(filtered) { 
+    var accs = _.values(accounts.map)
+    if (filtered)
+      accs = _.filter(accs, function(acc) { return acc !== account.bank })
 
-  account.get = function(nr) { return accounts.map[id(nr, 6)] }
+    return accs
+  }
 
-  account.bank = account.get(0) //The bank account always has the id 0
+  
+
+  
 
 
 

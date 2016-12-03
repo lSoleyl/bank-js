@@ -42,6 +42,7 @@
     <script src="./scripts/directives/newAccount.js"></script>
     <script src="./scripts/directives/settings.js"></script>
     <script src="./scripts/directives/transactionList.js"></script>
+    <script src="./scripts/directives/transferMoney.js"></script>
 
     <style>
       div.invalid {
@@ -54,23 +55,27 @@
     <div class="container">
       <nav>
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
-          <li><a data-toggle="tab" href="#transactions">Transactions</a></li>
-          <li><a data-toggle="tab" href="#newAccount">New account</a></li>
-          <li><a data-toggle="tab" href="#settings">Settings</a></li>
+          <li class="active"><a data-toggle="tab" href="#overview-tab" id="overview-pane">Overview</a></li>
+          <li><a data-toggle="tab" href="#transactions-tab" id="transactions-pane">Transactions</a></li>
+          <li><a data-toggle="tab" href="#transfer-tab" id="transfer-pane">Transfer money</a></li>
+          <li><a data-toggle="tab" href="#newAccount-tab" id="newAccount-pane">New account</a></li>
+          <li><a data-toggle="tab" href="#settings-tab" id="settings-pane">Settings</a></li>
         </ul>
       </nav>
       <div class="tab-content">
-        <div id="overview" class="tab-pane in active">
+        <div id="overview-tab" class="tab-pane in active">
           <overview></overview>
         </div>
-        <div id="transactions" class="tab-pane">
+        <div id="transactions-tab" class="tab-pane">
           <transaction-list></transaction-list>
         </div>
-        <div id="newAccount" class="tab-pane">
+        <div id="transfer-tab" class="tab-pane">
+          <transfer-money></transfer-money>
+        </div>
+        <div id="newAccount-tab" class="tab-pane">
           <new-account></new-account>
         </div>
-        <div id="settings" class="tab-pane">
+        <div id="settings-tab" class="tab-pane">
           <settings></settings>
         </div>
       </div>

@@ -1,0 +1,41 @@
+<h3>Transfer Money</h3>
+
+<form>
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label class="control-label" for="transfer-from">From:</label>
+      <select ng-model="transfer.from" class="form-control" id="transfer-from">
+        <option ng-repeat="account in accounts() track by account.id" value="{{account.id}}">{{account.id}} - {{account.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4" ng-class="{'has-error':sameAccount()}">
+      <label class="control-label" for="transfer-to">To:</label>
+      <select ng-model="transfer.to" class="form-control" id="transfer-to">
+        <option ng-repeat="account in accounts() track by account.id" value="{{account.id}}">{{account.id}} - {{account.name}}</option>
+      </select>
+      <div ng-show="sameAccount()" class="invalid">
+        Target account must be different from source account!
+      </div>
+    </div>
+
+    <div class="form-group col-md-4" ng-class="{'has-error':transfer.amount && !validAmount()}">
+      <label class="control-label" for="transfer-amount">Amount:</label>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="transfer.amount" id="transfer-amount">
+        <div class="input-group-addon">€</div>
+      </div>
+      <div ng-show="transfer.amount && !validAmount()" class="invalid">
+        Amount may not be negative!
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <label class="control-label" for="transfer-description">Description:</label>
+      <input type="text" ng-model="transfer.description" class="form-control" id="transfer-description">
+    </div>
+  </div>
+
+  <button class="btn btn-primary" ng-click="transferMoney()" ng-disabled="!formValid()">Transfer</button>
+</form>
