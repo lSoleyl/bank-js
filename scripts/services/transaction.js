@@ -1,17 +1,30 @@
 /** This service holds the list of all transactions
  */ 
 bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
-  var transactions = storage.get('transactions')
-  if (!transactions) {
-    transactions = {id:0, list:[]}
-    storage.put('transactions', transactions)
+  //Reload transactions from storage
+  function loadTransactions() {
+    var transactions = storage.get('transactions')
+    if (!transactions) {
+      transactions = {id:0, list:[]}
+      storage.put('transactions', transactions)
+    }
+
+    //Load date strings into date objects (necessary for date formatter)
+    _.each(transactions.list, function(transaction) { transaction.date = new Date(transaction.date) })
+
+    return transactions
   }
 
-  //Load date strings into date objects (necessary for date formatter)
-  _.each(transactions.list, function(transaction) { transaction.date = new Date(transaction.date) })
+  //Initialize transactions
+  var transactions = loadTransactions()
+
+ storage.on('changed', function() { transactions = loadTransactions() }) //Reload transactions on storage change
+
+
+
 
   //Create service object
-  var transaction = new EventEmitter()
+  var transaction = {}
 
   transaction.add = function(fromID, toID, amountCt, description) {
     if (fromID == toID)
@@ -28,8 +41,6 @@ bankjs.factory('transaction', ['storage', 'id', function(storage, id) {
     })
 
     storage.save() //Save each change
-
-    this.emit('change') //Notify listeners
   }
 
   /** returns the balance for a given acount in cent
