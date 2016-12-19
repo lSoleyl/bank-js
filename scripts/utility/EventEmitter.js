@@ -8,10 +8,10 @@ var EventEmitter = function() {
   }
 
   function registerHandler(emitter, event, handlerObject) {
-    if (!this.listeners[event]) 
-      this.listeners[event] = [] //Create empty listener list if missing
+    if (!emitter.listeners[event]) 
+      emitter.listeners[event] = [] //Create empty listener list if missing
 
-    this.listeners[event].push(handlerObject)
+    emitter.listeners[event].push(handlerObject)
   }
 
   /** Register to an event
