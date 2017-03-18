@@ -50,7 +50,7 @@ bankjs.factory('account', ['storage', 'id', 'transaction', function(storage, id,
     accounts.map[acc.id] = acc
 
     //Transfer initial balance from bank
-    transaction.add(account.bank.id, acc.id, parseInt(parseFloat(balance)*100), "Account created") 
+    transaction.add(account.bank().id, acc.id, parseInt(parseFloat(balance)*100), "Account created") 
   }
 
   //Return all accounts, if filtered is true, then the system account will not be returned
